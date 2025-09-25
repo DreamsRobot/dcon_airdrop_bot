@@ -1,25 +1,16 @@
-import logging
-from aiogram import Bot, Dispatcher, executor, types
-from config import BOT_TOKEN
-from handlers import start, wallet, profile, referral, admin
-from database.db import Base, engine
+from aiogram import executor
+from loader import dp
+from database.db import init_db
 
-# Logging
-logging.basicConfig(level=logging.INFO)
+# Import all handlers
+import handlers.start
+import handlers.profile
+import handlers.referral
+import handlers.wallet
 
-# Init bot
-bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
-dp = Dispatcher(bot)
-
-# DB setup
-Base.metadata.create_all(bind=engine)
-
-# Register handlers
-start.register_handlers(dp)
-wallet.register_handlers(dp)
-profile.register_handlers(dp)
-referral.register_handlers(dp)
-admin.register_handlers(dp)
+async def on_startup(_):
+    print("✅ Dcon Airdrop Bot is starting...")
+    init_db()
 
 if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
