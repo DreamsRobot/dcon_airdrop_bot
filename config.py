@@ -1,11 +1,10 @@
 BOT_TOKEN = "YOUR_BOT_TOKEN"
 
-# Required channels
-CHANNELS = [
-    "@DconAirdropUpdate",
-    "@DconAirdropSupport"
+# Channels / Groups user must join
+REQUIRED_CHANNELS = [
+    "@yourchannel1",
+    "@yourchannel2"
 ]
 
-ADMIN_IDS = [123456789]  # Replace with your Telegram ID
-START_BALANCE = 100
-REF_BONUS = 50
+JOIN_BONUS = 0.2   # USDT
+REF_BONUS = 0.2    # USDT
